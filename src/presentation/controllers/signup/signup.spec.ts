@@ -17,7 +17,7 @@ const makeAddAccount = (): AddAccount => {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
-        email: 'mail@mail.com',
+        email: 'valid_mail@mail.com',
         password: 'valid_password'
       }
       return fakeAccount
@@ -198,6 +198,26 @@ describe('SignUp Controller', () => {
       name: 'name',
       password: 'password',
       email: 'email@mail.com'
+    })
+  })
+
+  test('Expected to return 200 if valid data is provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password',
+        email: 'valid_mail@mail.com'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      password: 'valid_password',
+      email: 'valid_mail@mail.com'
     })
   })
 })
