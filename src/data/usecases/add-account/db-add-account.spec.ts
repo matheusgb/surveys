@@ -1,6 +1,6 @@
 import { type Encrypter } from '../../protocols/encrypter'
 import { DbAddAccount } from './db-add-account'
-import { type AccountModel, type AddAccountModel, type AddAccountRepository } from './db-add-account-protocols'
+import { type AddAccountParams, type AddAccountResult, type AddAccountRepository } from './db-add-account-protocols'
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
@@ -13,15 +13,15 @@ const makeEncrypter = (): Encrypter => {
 
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
-    async add (accountData: AddAccountModel): Promise<AccountModel> {
-      const fakeAccount = {
-        id: 'valid_id',
-        name: 'valid_name',
-        email: 'valid_email@mail.com',
-        password: 'hashed_password'
-      }
+    async add (accountData: AddAccountParams): Promise<AddAccountResult> {
+      // const fakeAccount = {
+      //   id: 'valid_id',
+      //   name: 'valid_name',
+      //   email: 'valid_email@mail.com',
+      //   password: 'hashed_password'
+      // }
 
-      return await new Promise(resolve => { resolve(fakeAccount) })
+      return await new Promise(resolve => { resolve(true) })
     }
   }
   return new AddAccountRepositoryStub()
@@ -105,11 +105,6 @@ describe('DbAddAccount Usecase', () => {
       password: 'valid_password'
     }
     const account = await sut.add(accountData)
-    expect(account).toEqual({
-      id: 'valid_id',
-      name: 'valid_name',
-      email: 'valid_email@mail.com',
-      password: 'hashed_password'
-    })
+    expect(account).toBe(true)
   })
 })

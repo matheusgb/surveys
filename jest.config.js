@@ -7,7 +7,6 @@ module.exports = {
     'index.ts',
     '.*-protocols.ts$'
   ],
-  testEnvironment: 'node',
   transform: {
     '.+\\.ts$': 'ts-jest'
   }
