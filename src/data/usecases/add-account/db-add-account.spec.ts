@@ -14,13 +14,6 @@ const makeEncrypter = (): Encrypter => {
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountParams): Promise<AddAccountResult> {
-      // const fakeAccount = {
-      //   id: 'valid_id',
-      //   name: 'valid_name',
-      //   email: 'valid_email@mail.com',
-      //   password: 'hashed_password'
-      // }
-
       return await new Promise(resolve => { resolve(true) })
     }
   }
