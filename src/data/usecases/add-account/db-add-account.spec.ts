@@ -14,11 +14,17 @@ const makeEncrypter = (): Encrypter => {
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountParams): Promise<AddAccountResult> {
-      return await new Promise(resolve => { resolve(true) })
+      return await new Promise(resolve => { resolve(makeFakeAccountResult()) })
     }
   }
   return new AddAccountRepositoryStub()
 }
+
+const makeFakeAccountResult = (): AddAccountResult => ({
+  insertion: true,
+  name: 'valid_name',
+  email: 'valid_email@mail.com'
+})
 
 const makeFakeAccountData = (): AddAccountParams => ({
   name: 'valid_name',
@@ -79,6 +85,6 @@ describe('DbAddAccount Usecase', () => {
   test('Should return an account on success', async () => {
     const { sut } = makeSut()
     const account = await sut.add(makeFakeAccountData())
-    expect(account).toBe(true)
+    expect(account).toStrictEqual(makeFakeAccountResult())
   })
 })

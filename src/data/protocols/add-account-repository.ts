@@ -5,4 +5,4 @@ export interface AddAccountRepository {
 }
 
 export type AddAccountRepositoryParams = AddAccountParams
-export type AddAccountRepositoryResult = boolean
+export type AddAccountRepositoryResult = AddAccountResult
